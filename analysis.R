@@ -31,7 +31,7 @@ d <- read_csv("data-to-model.csv")
 
 # data splitting
 
-train_test_split <- initial_split(d_ss) # strata = ""
+train_test_split <- initial_split(d) # strata = ""
 
 data_train <- training(train_test_split)
 data_test <- testing(train_test_split)
@@ -64,8 +64,12 @@ rf_mod_one <-
 
 rf_wf_one <-
     workflow() %>%
-    add_model(rf_mod) %>% 
+    add_model(rf_mod_one) %>% 
     add_recipe(sci_rec)
+
+# this is the line that causes an error:
+# Error: Not all variables in the recipe are present in the supplied training set: 'enrollment_status', 'passing_grade'.
+# why aren't these removed from the formula?
 
 fit_one <- fit(rf_wf_one, data = data_train_baked)
 test_preds <- predict(fit_one, new_data = data_test_prepped)
