@@ -3,7 +3,7 @@ library(tidyverse)
 gb <- read_csv("gradebook.csv", col_types = cols(last_access_data = col_date())) %>% clean_names()
 s <- read_csv("survey.csv") %>% clean_names()
 t <- read_csv("trace.csv") %>% clean_names()
-disc <- read_csv("all-disc-data.csv") %>% clean_names()
+disc_final <- read_csv("disc-final.csv") # this is processed because it is not easy to anonymize the text
 
 gb %>% 
     count(student_id) 
