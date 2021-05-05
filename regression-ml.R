@@ -6,6 +6,8 @@ library(vip)
 
 d <- read_csv("data-to-model.csv")
 
+d <- select(d, -time_spent) # this is another continuous outcome
+
 train_test_split <- initial_split(d, prop = .70)
 
 data_train <- training(train_test_split)
@@ -14,13 +16,18 @@ kfcv <- vfold_cv(data_train)
 
 # pre-processing/feature engineering
 
+# d <- select(d, student_id:final_grade, subject:percomp) # selecting the contextual/demographic variables
+# and the survey variables
+
+d <- d %>% select(-student_id)
+
 sci_rec <- recipe(final_grade ~ ., data = d) %>% 
-    add_role(student_id, course_id, new_role = "ID variable") %>% # this can be any string
+    add_role(course_id, new_role = "ID variable") %>% # this can be any string
     step_novel(all_nominal_predictors()) %>% 
     step_normalize(all_numeric_predictors()) %>%
     step_dummy(all_nominal_predictors()) %>% 
     step_nzv(all_predictors()) %>% 
-    step_impute_knn(all_predictors(), all_outcomes()) # may want to not include this
+    step_impute_knn(all_predictors(), all_outcomes())
 
 # specify model
 rf_mod_many <-
@@ -39,9 +46,9 @@ rf_wf_many <-
 finalize(mtry(), data_train)
 finalize(min_n(), data_train)
 
-tree_grid <- grid_max_entropy(mtry(range(1, 16)),
+tree_grid <- grid_max_entropy(mtry(range(1, 15)),
                               min_n(range(2, 40)),
-                              size = 20)
+                              size = 10)
 
 # fit model with tune_grid
 tree_res <- rf_wf_many %>% 

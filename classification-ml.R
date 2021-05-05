@@ -6,6 +6,8 @@ library(vip)
 
 d <- read_csv("data-to-model.csv")
 
+d <- select(d, -time_spent) # this is another outcome
+
 d_class <- mutate(d, passing_grade = ifelse(final_grade > 70, 1, 0),
                   passing_grade = as.factor(passing_grade)) %>% 
     select(-final_grade)
@@ -17,6 +19,11 @@ data_train <- training(train_test_split)
 kfcv <- vfold_cv(data_train)
 
 # pre-processing/feature engineering
+
+d <- select(d, student_id:final_grade, subject:percomp) # selecting the contextual/demographic variables
+# and the survey variables
+
+d <- d %>% select(-student_id)
 
 sci_rec <- recipe(passing_grade ~ ., data = d_class) %>% 
     add_role(student_id, course_id, new_role = "ID variable") %>% # this can be any string
@@ -45,7 +52,7 @@ finalize(min_n(), data_train)
 
 tree_grid <- grid_max_entropy(mtry(range(1, 16)),
                               min_n(range(2, 40)),
-                              size = 20)
+                              size = 10)
 
 # fit model with tune_grid
 tree_res <- rf_wf_many %>% 

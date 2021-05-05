@@ -34,28 +34,6 @@ find_length <- function(x) {
         length()
 }
 
-disc_ss <- disc %>% 
-    mutate(thread_title = stringr::str_replace(thread_title, "10-4", "1-4")) %>% 
-    mutate(thread_title = stringr::str_replace(thread_title, "Welcome", "0-0-Welcome")) %>% 
-    rename(student_id = user_pk,
-           course_id = section) %>% 
-    select(student_id, course_id, thread_title, text) %>% 
-    mutate(text = clean_text(text)) %>% 
-    mutate(n_words = map_dbl(text, find_length))
-
-course_key <- disc_ss %>% 
-    mutate(course_subset = stringr::str_sub(course_id, end = 10)) %>% 
-    count(course_subset, thread_title) %>% 
-    group_by(course_subset) %>% 
-    slice(1:3) %>% # first three discussions
-    ungroup()
-
-disc_final <- disc_ss %>% 
-    semi_join(course_key) %>% 
-    group_by(student_id, course_id) %>% 
-    summarize(sum_discussion_posts = n(),
-              sum_n_words = sum(n_words))
-
 d <- t %>% 
     left_join(s_ss) %>% 
     left_join(gb_final) %>% 
@@ -71,3 +49,4 @@ d <- select(d, -total_points_possible, -total_points_earned, -tv)
 d_ss <- d %>% filter(!is.na(uv))
 
 write_csv(d_ss, "data-to-model.csv")
+

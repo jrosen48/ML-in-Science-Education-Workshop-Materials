@@ -203,7 +203,7 @@ What else?
 
 # How is this different from regression?
 
-The _aim_ is different, the algorithms are methods of estimation are not (or, are differences in degree, rather thak in kind).
+The _aim_ is different, the algorithms are methods of estimation are not (or, are differences in degree, rather than in kind).
 
 In a linear regression, our aim is to estimate parameters, such as $\beta_0$ (intercept) and $\beta_1$ (slope), and to make inferences about them that are not biased by our particular sample.
 
@@ -293,7 +293,7 @@ This isn't just for beginners or science education researchers; [most spam filte
 
 # What's stopping me from specifying a complex model?
 
-- Nothing too much, apart from computing power, time, and concerns of interpretability
+- Nothing too much, apart from computing power, time, and concerns of 
 - A "check" on your work is your predictions on _test_ set data
   - *Train data*: Coded/outcome data that you use to train ("estimate") your model
   - *Validation data<sup>1</sup>*: Data you use to select a particular algorithm
@@ -554,13 +554,13 @@ class: inverse, center, middle
 # Overview of classification
 
 - We are interested in predicting a _dichotomous_ or _continuous_ outcome; our predictions are _probabilities_
-- These probabilities are often changed (through the use of a threshhold - often 0.50) back into dichotomous or categorical labels
+- These probabilities are often changed (through the use of a threshold - often 0.50) back into dichotomous or categorical labels
 - Metrics for how well the model performed include:
   - *Accuracy*: For the known codes, what percentage of the predictions are correct
   - *Cohen's $\kappa$*: Same as accuracy, while account for the base rate of (chance) agreement
   - *Sensitivity (AKA recall)*: Among the true "positives", what percentage are classified as "positive"?
   - *Specificity*: Among the true "negatives", what percentage are classified as "negative"?
-  - *ROC AUC*: For different levels of the threshhold, what is the sensitivity and specificity?
+  - *ROC AUC*: For different levels of the threshold, what is the sensitivity and specificity?
 
 ---
 
@@ -640,7 +640,6 @@ class: inverse, center, middle
 class: center, middle
 
 # Thank you and contact information
-
 Stay in touch!
 
 Joshua Rosenberg  
