@@ -564,7 +564,7 @@ class: inverse, center, middle
 
 ---
 
-# Overview of regression modeling process 
+# Overview of classification modeling process 
 
 *Nearly identical to that for regression*
 
