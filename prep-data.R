@@ -1,28 +1,15 @@
 library(tidyverse)
+library(janitor)
 
 gb <- read_csv("gradebook.csv", col_types = cols(last_access_data = col_date())) %>% clean_names()
 s <- read_csv("survey.csv") %>% clean_names()
 t <- read_csv("trace.csv") %>% clean_names()
+
 disc_final <- read_csv("disc-final.csv") # this is processed because it is not easy to anonymize the text
-
-gb %>% 
-    count(student_id) 
-
-gb %>% 
-    count(student_id) %>% 
-    summarize(mean_n = mean(n))
-
-s %>% 
-    count(student_id)
-
-t %>% 
-    count(student_id)
 
 s_ss <- s %>% 
     select(student_id:tv) %>% 
     mutate(student_id = as.double(student_id))
-
-t
 
 gb_ss <- gb %>%
     filter(gradebook_type != "T") %>% 
@@ -36,6 +23,7 @@ gb_final <- gb_ss %>%
               total_points_earned = sum(points_earned, na.rm = T)) %>% 
     mutate(percentage_earned = total_points_earned / total_points_possible)
 
+# for the next function
 clean_text <- function(htmlString) {
     return(gsub("<.*?>", "", htmlString))
 }
@@ -73,13 +61,13 @@ d <- t %>%
     left_join(gb_final) %>% 
     left_join(disc_final)
 
-d <- d %>% 
-    mutate(passing_grade = if_else(final_grade >= .70,
-                                   1,
-                                   0))
-d %>% 
-    visdat::vis_dat()
+# remove students with substantial missing data
+# d %>% 
+#     visdat::vis_dat() 
 
-d_ss <- d %>% filter(!is.na(tv))
+# a little further prep
+d <- select(d, -total_points_possible, -total_points_earned, -tv)
+
+d_ss <- d %>% filter(!is.na(uv))
 
 write_csv(d_ss, "data-to-model.csv")
