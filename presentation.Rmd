@@ -135,8 +135,81 @@ class: inverse, center, middle
 
 # Defining Machine Learning (ML)
 
-- *Artificial Intelligence*: Simulating human intelligence through the use of computers
-- 
+- *Artificial Intelligence (AI)*
+.footnote[
+[1]  I feel super uncomfortable bringing AI into this, but perhaps it's useful just to be clear about terminology
+]
+: Simulating human intelligence through the use of computers
+- *Machine learning (ML)*: A subset of AI focused on how computers acquire new information/knowledge
+
+This definition leaves a lot of space for a range of approaches to ML
+
+---
+
+background-image: url("https://i.vas3k.ru/7vx.jpg")
+background-position: center
+background-size: contain
+
+---
+
+# A helpful frame: Supervised & unsupervised
+
+## Supervised ML
+
+- Requires coded data or data with a known outcome
+- Uses coded/outcome data to train an algorithm
+- Uses that algorithm to **predict the codes/outcomes for new data** (data not used during the training)
+- Can take the form of a *classification* (predicting a dichotomous or categorical outcome) or a *regression* (predicting a continuous outcome)
+- Algorithms include:
+  - Linear regression (really!)
+  - Logistic regression
+  - Decision tree
+  - Support Vector Machine
+
+---
+
+# A helpful frame: Supervised & unsupervised
+
+## Unsupervised ML
+
+- Does not require coded data; one way to think about unsupervised ML is that its purpose is to discover codes/labels
+- Is used to discover groups among observations/cases or to summarize across variables
+- Can be used in an _exploratory mode_ (see [Nelson, 2020](https://journals.sagepub.com/doi/full/10.1177/0049124118769114?casa_token=EV5XH31qbyAAAAAA%3AFg09JQ1XHOOzlxYT2SSJ06vZv0jG-s4Qfz8oDIQwh2jrZ-jrHNr7xZYL2FwnZtZiokhPalvV1RL2Bw)) 
+- **Warning**: The results of unsupervised ML _cannot_ directly be used to provide codes/outcomes for supervised ML techniques 
+- Can work with both continuous and dichotomous or categorical variables
+- Algorithms include:
+  - Cluster analysis
+  - Principle Components Analysis (really!)
+  - Latent Dirichlet Allocation (topic modeling)
+
+---
+
+# How do you know what technique to choose?
+
+Do you have coded data or data with a known outcome -- let's say about science students -- and, do you want to:
+
+- _Predict_ how other students with similar data (but without a known outcome) perform?
+- _Scale_ coding that you have done for a sample of data to a larger sample?
+- _Provide timely or instantaneous feedback_, like in many learning analytics systems?
+
+**Supervised methods may be your best bet**
+
+Do you not yet have codes/outcomes -- and do you want to?
+
+- _Achieve a starting point_ for qualitative coding, perhaps in a ["computational grounded theory"](https://journals.sagepub.com/doi/full/10.1177/0049124117729703) mode?
+- _Discover groups or patterns in your data_ that may be interesting on their own?
+- _Reduce the number of variables in your dataset_ to a smaller, but perhaps nearly as explanatory/predictive - set of variables?
+
+**Unsupervised methods may be helpful**
+
+---
+
+# Okay, I know what _type_ of method to use
+
+### But, how do I select a particular model?
+
+One general principle is to start with the simplest possible model and to build toward
+more complex models as it is helpfuL.
 
 ---
 
