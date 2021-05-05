@@ -155,8 +155,11 @@ This definition leaves a lot of space for a range of approaches to ML
 **Using Twitter users profile descriptions to predict whether or not they were teachers**
 
 - Manually coded &gt; 500 profiles for whether they were teachers or non-teachers
-- Trained a Support Vector Machine model (or algorithm) on 90% of the data
+- Trained a Support Vector Machine model (or algorithm) on _text features_ using 90% of the data
 - For the remaining 10% of the data, we predicted whether or not someone was a teacher with an accuracy of 85%; `\(\kappa\)` = 0.612.
+- Then used the trained classifier to predict whether or not 1000s of users were or were not teachers (and used these classifications in a multi-level model)
+
+Rosenberg et al., *AERA Open*, in press
 
 https://osf.io/xymsd/
 
@@ -546,6 +549,7 @@ class: inverse, center, middle
 - Be mindful of your R code; small issues (with names!) can cause difficulties
 - Share and receive feedback
 - Explore the variety of ways you can use machine learning; we are deciding as a field how machine learning will (or will not) make a difference in our work
+- It _will be really hard at first_; you can do this!
 
 ---
 
