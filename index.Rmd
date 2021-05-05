@@ -203,7 +203,7 @@ What else?
 
 # How is this different from regression?
 
-The _aim_ is different, the algorithms are methods of estimation are not (or, are differences in degree, rather than in kind).
+The _aim_ is different, the algorithms and methods of estimation are not (or, are differences in degree, rather than in kind).
 
 In a linear regression, our aim is to estimate parameters, such as $\beta_0$ (intercept) and $\beta_1$ (slope), and to make inferences about them that are not biased by our particular sample.
 
